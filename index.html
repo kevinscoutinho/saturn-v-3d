@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Saturn V em 3D</title>
+    <meta name="description" content="Modelo 3D interativo do foguete Saturn V da NASA, com partes clicáveis e ficha técnica.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js" defer></script>
+    <script src="./script.js" defer></script>
+</head>
+<body>
+<div class="app">
+  <section class="stage" id="stage" aria-label="Modelo 3D do Saturn V">
+    <div class="stars"></div>
+    <div class="loading" id="loading">Carregando o modelo…</div>
+    <div class="markers" id="markers"></div>
+    <div class="hud-top">
+      <div class="hud-title"><b>Saturn V</b><span class="hud-sub"> · Modelo 3D: NASA 3D Resources</span></div>
+      <div class="hud-tools">
+        <button class="tool" id="spin" aria-pressed="true">Girar</button>
+        <button class="tool" id="reset">Vista inteira</button>
+      </div>
+    </div>
+    <div class="hint">Arraste para girar · botão direito ou Shift + arrastar para mover · role para aproximar · clique numa parte do foguete</div>
+    <article class="card" id="card" hidden aria-live="polite">
+      <div class="card-head">
+        <div>
+          <div class="kicker" id="c-kicker"></div>
+          <h2 id="c-title"></h2>
+        </div>
+        <button class="close" id="c-close" aria-label="Fechar">✕</button>
+      </div>
+      <p class="sub" id="c-sub"></p>
+      <p class="desc" id="c-desc"></p>
+      <dl id="c-specs"></dl>
+      <div class="src" id="c-src"></div>
+      <div class="nav">
+        <button id="c-down">↓ Parte abaixo</button>
+        <button id="c-up">Parte acima ↑</button>
+      </div>
+    </article>
+  </section>
+
+  <aside class="panel">
+    <div class="panel-inner">
+      <header>
+        <div class="eyebrow">NASA · Programa Apollo · 1967–1973</div>
+        <h1>Saturn V</h1>
+        <p class="lead">O foguete que levou pessoas à Lua. Tinha três estágios empilhados, cada um com os próprios motores e tanques. Cada estágio queimava, esvaziava e se soltava, e o seguinte assumia. Só a cápsula, no topo, voltava inteira para a Terra.</p>
+      </header>
+
+      <div class="figs" aria-label="Números principais">
+        <div class="fig"><div class="k">Altura</div><div class="v">110,6<span>m</span></div><div class="n">363 ft, com a torre de escape</div></div>
+        <div class="fig"><div class="k">Diâmetro</div><div class="v">10,1<span>m</span></div><div class="n">33 ft, no 1º e 2º estágio</div></div>
+        <div class="fig"><div class="k">Massa na decolagem</div><div class="v">2 821<span>t</span></div><div class="n">6 220 025 lb (Apollo 4)</div></div>
+        <div class="fig"><div class="k">Empuxo na decolagem</div><div class="v">33,4<span>MN</span></div><div class="n">7,5 milhões de lbf, 5 motores F-1</div></div>
+      </div>
+
+      <section>
+        <h3>Partes do foguete</h3>
+        <ul class="parts" id="parts"></ul>
+      </section>
+
+      <section>
+        <h3>A sequência de um voo</h3>
+        <ol class="seq">
+          <li><div><b>Decolagem</b><span>Os cinco F-1 do primeiro estágio queimam cerca de 12,7 toneladas de propelente por segundo.</span></div></li>
+          <li><div><b>Fim do S-IC</b><span>Após cerca de 150 segundos o primeiro estágio se solta e cai no oceano Atlântico.</span></div></li>
+          <li><div><b>S-II e torre de escape</b><span>Os cinco J-2 do segundo estágio acendem e queimam por cerca de 6 minutos. A torre de escape, que não foi necessária, é descartada.</span></div></li>
+          <li><div><b>Órbita da Terra</b><span>O S-IVB faz a primeira queima, de 136 segundos, e coloca a nave em órbita.</span></div></li>
+          <li><div><b>Rumo à Lua</b><span>Nas missões lunares, o S-IVB reacende por quase 6 minutos e coloca a nave na trajetória para a Lua.</span></div></li>
+        </ol>
+      </section>
+
+      <section>
+        <h3>História</h3>
+        <p>O Saturn V foi desenvolvido pelo Marshall Space Flight Center da NASA, em Huntsville, com cada estágio construído por uma empresa diferente: Boeing, North American Aviation e McDonnell Douglas. O computador que guiava o foguete foi feito pela IBM.</p>
+        <p>O primeiro voo foi a Apollo 4, sem tripulação, em 9 de novembro de 1967. Entre 1969 e 1972, o Saturn V lançou as seis missões que pousaram na Lua, começando pela Apollo 11. O último lançamento, em 14 de maio de 1973, levou a estação espacial Skylab para a órbita.</p>
+      </section>
+
+      <section class="sources">
+        <h3>Fontes</h3>
+        <ul>
+          <li><a href="https://ntrs.nasa.gov/api/citations/19670031260/downloads/19670031260.pdf" target="_blank" rel="noopener">NASA, Apollo 4 Press Kit (Release 67-275, nov. 1967)</a>: dimensões, massas, empuxos e tempos de queima de cada parte</li>
+          <li><a href="https://airandspace.si.edu/collection-objects/rocket-engine-liquid-fuel-f-1/nasm_A19700271000" target="_blank" rel="noopener">Smithsonian National Air and Space Museum, motor F-1</a>: dados do F-1 e missões lunares</li>
+          <li><a href="https://www.nasa.gov/?p=434476" target="_blank" rel="noopener">NASA, This Week in NASA History: Skylab Launches</a>: último lançamento</li>
+          <li><a href="https://github.com/nasa/NASA-3D-Resources" target="_blank" rel="noopener">NASA 3D Resources</a>: modelo 3D</li>
+        </ul>
+        <p class="note" style="margin-top:14px">Os números são os do press kit da Apollo 4. Os foguetes das missões seguintes eram um pouco mais pesados e potentes. Valores convertidos de unidades imperiais e arredondados. O modelo 3D é uma representação simplificada, com proporções e pintura aproximadas.</p>
+      </section>
+    </div>
+  </aside>
+</div>
+</body>
+</html>
